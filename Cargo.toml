@@ -1,0 +1,11 @@
+[package]
+name = "vulkanroad"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+vulkano = { version = "0.34.0" , features = ["macros"] }
+vulkano-shaders = { version = "0.34.0" }
+winit = "0.28.0"
