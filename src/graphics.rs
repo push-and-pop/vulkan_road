@@ -1,6 +1,7 @@
 use std::sync::Arc;
 
 use vulkano::device::QueueFlags;
+use vulkano::device::{Device, DeviceCreateInfo, QueueCreateInfo};
 use vulkano::instance::{Instance, InstanceCreateInfo};
 use vulkano::swapchain::Surface;
 use vulkano::VulkanLibrary;
@@ -51,6 +52,19 @@ impl Graphics {
             })
             .expect("couldn't find a graphical queue family")
             as u32;
+
+        let (device, mut queues) = Device::new(
+            physical_device,
+            DeviceCreateInfo {
+                // here we pass the desired queue family to use by index
+                queue_create_infos: vec![QueueCreateInfo {
+                    queue_family_index,
+                    ..Default::default()
+                }],
+                ..Default::default()
+            },
+        )
+        .expect("failed to create device");
 
         self
     }
